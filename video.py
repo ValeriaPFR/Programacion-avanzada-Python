@@ -1,35 +1,35 @@
-from advertisement import Advertisement
+desde anuncio import Anuncio
 
-class Video(Advertisement):
-    # Constants for the video advertisement format and subtypes
-    FORMAT = "Video"
-    SUBTYPES = ("instream", "outstream")
+class Video(Anuncio):
+    # Constantes para el formato y subtipos del anuncio de video
+    FORMATO = "Video"
+    SUBTIPOS = ("instream", "outstream")
     
-    def __init__(self, width: int, height: int, file_url: str, click_url: str, sub_type: str, duration: int):
-        # Initialize the Video advertisement with width, height, file URL, click URL, subtype, and duration
-        super().__init__(width, height, file_url, click_url, sub_type)
-        self.__duration = max(duration, 1)  # Video duration validation
+    def __init__(self, ancho: int, alto: int, url_archivo: str, url_clic: str, sub_tipo: str, duracion: int):
+        # Inicializa el anuncio de video con ancho, alto, URL del archivo, URL de clic, subtipo y duración
+        super().__init__(ancho, alto, url_archivo, url_clic, sub_tipo)
+        self.__duracion = max(duracion, 1)  # Validación de la duración del video
         
     @property
-    def width(self):
-        return self.__width
+    def ancho(self):
+        return self.__ancho
     
-    @width.setter
-    def width(self, new_width):
+    @ancho.setter
+    def ancho(self, nuevo_ancho):
         pass
     
     @property
-    def height(self):
-        return self.__height
+    def alto(self):
+        return self.__alto
 
-    @height.setter
-    def height(self, new_height):
+    @alto.setter
+    def alto(self, nuevo_alto):
         pass
     
-    def compress_advertisement(self):
-        # Method to compress video advertisement
-        print("Video compression not yet implemented")
+    def comprimir_anuncio(self):
+        # Método para comprimir el anuncio de video
+        print("Compresión de video aún no implementada")
 
-    def resize_advertisement(self):
-        # Method to resize video advertisement
-        print("Video resizing not yet implemented")
+    def redimensionar_anuncio(self):
+        # Método para redimensionar el anuncio de video
+        print("Redimensionamiento de video aún no implementado")

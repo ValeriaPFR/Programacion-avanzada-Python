@@ -1,150 +1,150 @@
 from advertisement import Advertisement, Video, Display, Social
-from campaign import Campaign
+from campania import Campania
 from datetime import datetime, timedelta
-from error import InvalidSubtypeError
+from error import TipoSubTipoInvalidoError  
 
 
-def request_type_and_subtype(advertisement_class):
+def solicitar_tipo_y_subtipo(clase_anuncio):
     """
-    Prompts the user for the type and subtype of advertisement and validates the input.
+    Solicita al usuario el tipo y subtipo de anuncio y valida la entrada.
 
     Args:
-        advertisement_class (type): The class of the advertisement (Video, Display, or Social).
+        clase_anuncio (type): La clase del anuncio (Video, Display o Social).
 
     Returns:
-        tuple: A tuple containing the type and subtype of the advertisement entered.
+        tuple: Tupla que contiene el tipo y subtipo de anuncio ingresados.
     """
-    valid_types = {
+    tipos_validos = {
         "video": Video,
         "display": Display,
         "social": Social,
     }
 
     while True:
-        entered_type = (
-            input(f"Enter the type of advertisement ({', '.join(valid_types.keys())}): ")
+        tipo_ingresado = (
+            input(f"Ingrese el tipo de anuncio ({', '.join(tipos_validos.keys())}): ")
             .lower()
             .strip()
         )
-        if entered_type in valid_types:
-            advertisement_class = valid_types[entered_type]
-            entered_subtype = request_advertisement_subtype(advertisement_class)
-            return entered_type, entered_subtype
+        if tipo_ingresado in tipos_validos:
+            clase_anuncio = tipos_validos[tipo_ingresado]
+            subtipo_ingresado = solicitar_subtipo_anuncio(clase_anuncio)
+            return tipo_ingresado, subtipo_ingresado
         else:
             print(
-                f"Error: The advertisement type '{entered_type}' is not valid. Valid types are: {', '.join(valid_types.keys())}"
+                f"Error: El tipo de anuncio '{tipo_ingresado}' no es válido. Los tipos válidos son: {', '.join(tipos_validos.keys())}"
             )
 
 
-def request_advertisement_subtype(advertisement_class):
+def solicitar_subtipo_anuncio(clase_anuncio):
     """
-    Prompts the user for a valid subtype for the advertisement of the specified class.
+    Solicita al usuario un subtipo válido para el anuncio de la clase especificada.
 
     Args:
-        advertisement_class (type): The class of the advertisement (Video, Display, or Social).
+        clase_anuncio (type): La clase del anuncio (Video, Display o Social).
 
     Returns:
-        str: The advertisement subtype entered by the user.
+        str: El subtipo de anuncio ingresado por el usuario.
     """
-    valid_subtypes = (
-        advertisement_class.SUBTYPES
-    )  # Get valid subtypes from the class
+    subtipos_validos = (
+        clase_anuncio.SUBTIPOS
+    )  # Obtener los subtipos válidos de la clase
     while True:
-        entered_subtype = (
-            input(f"Enter a valid subtype for {advertisement_class.FORMAT.lower()}: ")
+        subtipo_ingresado = (
+            input(f"Ingrese un subtipo válido para {clase_anuncio.FORMAT.lower()}: ")
             .lower()
             .strip()
-        )  # Normalize input
-        if entered_subtype in valid_subtypes:
-            return entered_subtype
+        )  # Normalizar el input
+        if subtipo_ingresado in subtipos_validos:
+            return subtipo_ingresado
         else:
             print(
-                f"Error: The subtype '{entered_subtype}' is not valid. Valid subtypes are: {valid_subtypes}"
+                f"Error: El subtipo '{subtipo_ingresado}' no es válido. Los subtipos válidos son: {subtipos_validos}"
             )
 
 
-def request_campaign_name():
+def solicitar_nombre_campaña():
     """
-    Prompts the user for a new name for the campaign and performs validation.
+    Solicita al usuario un nuevo nombre para la campaña y realiza validación.
 
     Returns:
-        str: The new campaign name entered by the user.
+        str: El nuevo nombre de la campaña ingresado por el usuario.
     """
     while True:
-        new_name = input("Enter a new name for the campaign: ")
-        if len(new_name) <= 250:
-            return new_name
+        nuevo_nombre = input("Ingrese un nuevo nombre para la campaña: ")
+        if len(nuevo_nombre) <= 250:
+            return nuevo_nombre
         else:
-            print("Error: The campaign name cannot exceed 250 characters.")
+            print("Error: El nombre de la campaña no puede exceder los 250 caracteres.")
 
 
-def create_advertisement(type, subtype):
+def crear_anuncio(tipo, subtipo):
     """
-    Creates an advertisement based on the selected type and subtype.
+    Crea un anuncio en base al tipo y subtipo seleccionados.
 
     Args:
-        type (str): The type of advertisement (video, display, social).
-        subtype (str): The advertisement subtype.
+        tipo (str): El tipo de anuncio (video, display, social).
+        subtipo (str): El subtipo de anuncio.
 
     Returns:
-        Advertisement: Created Advertisement object.
+        Anuncio: Objeto Anuncio creado.
     """
     try:
-        if type == "video":
-            width = int(input("Enter the width of the video: "))
-            height = int(input("Enter the height of the video: "))
-            #file_url = input("Enter the video file URL: ")
-            #click_url = input("Enter the video click URL: ")
-            duration = int(input("Enter the duration of the video (in seconds): "))
-            advertisement = Video(width, height, file_url, click_url, subtype, duration)
-        elif type == "display":
-            width = int(input("Enter the width of the display advertisement: "))
-            height = int(input("Enter the height of the display advertisement: "))
-            #file_url = input("Enter the image file URL: ")
-            #click_url = input("Enter the display advertisement click URL: ")
-            advertisement = Display(width, height, file_url, click_url, subtype)
-        elif type == "social":
-            width = int(input("Enter the width of the social advertisement: "))
-            height = int(input("Enter the height of the social advertisement: "))
-            #file_url = input("Enter the social advertisement URL: ")
+        if tipo == "video":
+            ancho = int(input("Ingrese el ancho del video: "))
+            alto = int(input("Ingrese el alto del video: "))
+            #url_archivo = input("Ingrese la URL del archivo de video: ")
+            #url_clic = input("Ingrese la URL de clic del video: ")
+            duracion = int(input("Ingrese la duración del video (en segundos): "))
+            anuncio = Video(ancho, alto, url_archivo, url_clic, subtipo, duracion)
+        elif tipo == "display":
+            ancho = int(input("Ingrese el ancho del anuncio display: "))
+            alto = int(input("Ingrese el alto del anuncio display: "))
+            #url_archivo = input("Ingrese la URL del archivo de imagen: ")
+            #url_clic = input("Ingrese la URL de clic del anuncio display: ")
+            anuncio = Display(ancho, alto, url_archivo, url_clic, subtipo)
+        elif tipo == "social":
+            ancho = int(input("Ingrese el ancho del anuncio social: "))
+            alto = int(input("Ingrese el alto del anuncio social: "))
+            #url_archivo = input("Ingrese la URL del anuncio social: ")
         else:
-            raise ValueError(f"Invalid advertisement type: '{type}'")
+            raise ValueError(f"Tipo de anuncio no válido: '{tipo}'")
     except ValueError as e:
         print(f"Error: {e}")
         return None
 
 
-def handle_error(e):
+def manejar_error(e):
     """
-    Handles exceptions and writes the error message to the "error.log" file.
+    Maneja las excepciones y escribe el mensaje de error en el archivo "error.log".
 
     Args:
-        e (Exception): The exception that occurred.
+        e (Exception): La excepción que se produjo.
     """
     with open("error.log", "a+") as log:
         log.write(f"{e}\n")
-    print("An error occurred. Check the 'error.log' file for more details.")
+    print("Ha ocurrido un error. Consulte el archivo 'error.log' para más detalles.")
 
 
 def main():
-    new_video = [
-        Video(640, 480, "video.mp4", "http://example.com", "Video_campaign", 60)
+    nuevo_video = [
+        Video(640, 480, "video.mp4", "http://example.com", "Video_campania", 60)
     ]
-    start_date = datetime.now()
-    end_date = start_date + timedelta(days=2)
-    new_campaign = Campaign("Campaign1", start_date, end_date, new_video)
+    f_inicio = datetime.now()
+    f_termino = f_inicio + timedelta(days=2)
+    nueva_campania = Campania("Campaña1", f_inicio, f_termino, nuevo_video)
 
     try:
-        new_name = request_campaign_name()
-        new_campaign.name = new_name
+        nuevo_nombre = solicitar_nombre_campaña()
+        nueva_campania.nombre = nuevo_nombre
 
-        type_advertisement, subtype_advertisement = request_type_and_subtype(Video)
-        new_advertisement = create_advertisement(type_advertisement, subtype_advertisement)
-        if new_advertisement:
-            new_campaign.add_advertisement(new_advertisement)
+        tipo_anuncio, subtipo_anuncio = solicitar_tipo_y_subtipo(Video)
+        nuevo_anuncio = crear_anuncio(tipo_anuncio, subtipo_anuncio)
+        if nuevo_anuncio:
+            nueva_campania.agregar_anuncio(nuevo_anuncio)
 
     except Exception as e:
-        handle_error(e)
+        manejar_error(e)
 
 
 if __name__ == "__main__":

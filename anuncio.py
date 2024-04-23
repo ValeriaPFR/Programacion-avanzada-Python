@@ -1,122 +1,122 @@
 from abc import ABC, abstractmethod
 
-class Advertisement(ABC):
-    # Constructor method for Advertisement class
-    def __init__(self, width: int, height: int, file_url: str, click_url: str, sub_type: str):
-        # Initialize attributes for width, height, file_url, click_url, and sub_type
-        self.__width = width
-        self.__height = height
-        self.__file_url = file_url
-        self.__click_url = click_url
-        self.__sub_type = sub_type
+class Anuncio(ABC):
+    # Metodo constructor para la clase 'Anuncio'
+    def __init__(self, ancho: int, alto: int, url_archivo: str, url_clic: str, sub_tipo: str):
+        # Inicializa los atributos para ancho, alto, url_archivo, url_clic y sub_tipo
+        self.__ancho = ancho
+        self.__alto = alto
+        self.__url_archivo = url_archivo
+        self.__url_clic = url_clic
+        self.__sub_tipo = sub_tipo
 
     @property
-    def width(self):
-        # Getter method for width attribute
-        return self.__width
+    def ancho(self):
+        # Metodo getter para el atributo ancho
+        return self.__ancho
 
-    @width.setter
-    def width(self, new_width):
-        # Setter method for width attribute
-        if new_width > 0:
-            self.__width = new_width
+    @ancho.setter
+    def ancho(self, nuevo_ancho):
+        # Metodo setter para el atributo ancho
+        if nuevo_ancho > 0:
+            self.__ancho = nuevo_ancho
         else:
-            raise ValueError("Width must be a positive value.")
+            raise ValueError("El ancho debe ser un valor positivo.")
 
     @property
-    def height(self):
-        # Getter method for height attribute
-        return self.__height
+    def alto(self):
+        # Metodo getter para el atributo alto
+        return self.__alto
 
-    @height.setter
-    def height(self, new_height):
-        # Setter method for height attribute
-        if new_height > 0:
-            self.__height = new_height
+    @alto.setter
+    def alto(self, nuevo_alto):
+        # Metodo setter para el atributo alto
+        if nuevo_alto > 0:
+            self.__alto = nuevo_alto
         else:
-            raise ValueError("Height must be a positive value.")
+            raise ValueError("La altura debe ser un valor positivo.")
 
     @property
-    def file_url(self):
-        # Getter method for file_url attribute
-        return self.__file_url
+    def url_archivo(self):
+        # Metodo getter para el atributo url_archivo
+        return self.__url_archivo
 
-    @file_url.setter
-    def file_url(self, new_url):
-        # Setter method for file_url attribute
-        self.__file_url = new_url
+    @url_archivo.setter
+    def url_archivo(self, nueva_url):
+        # Metodo setter para el atributo url_archivo
+        self.__url_archivo = nueva_url
 
     @property
-    def click_url(self):
-        # Getter method for click_url attribute
-        return self.__click_url
+    def url_clic(self):
+        # Metodo getter para el atributo url_clic
+        return self.__url_clic
 
-    @click_url.setter
-    def click_url(self, new_url):
-        # Setter method for click_url attribute
-        self.__click_url = new_url
+    @url_clic.setter
+    def url_clic(self, nueva_url):
+        # Metodo setter para el atributo url_clic
+        self.__url_clic = nueva_url
 
     @abstractmethod
-    def format(self):
-        # Abstract method for determining format of advertisement
+    def formato(self):
+        # Metodo abstracto para determinar el formato del anuncio
         pass
 
     @staticmethod
-    def show_formats(format: str, sub_types: tuple):
-        # Static method to display available formats
+    def mostrar_formatos(formato: str, sub_tipos: tuple):
+        # Metodo estático para mostrar los formatos disponibles
         print(f"""
-FORMAT {format}
+FORMATO {formato}
 ==========
-- {sub_types[0]}
-- {sub_types[1]}
+- {sub_tipos[0]}
+- {sub_tipos[1]}
 ==========
 """)
 
-class VideoAdvertisement(Advertisement):
-    # Define format and subtypes for VideoAdvertisement
-    FORMAT = "Video"
-    SUBTYPES = ("instream", "outstream")
+class AnuncioVideo(Anuncio):
+    # Define el formato y los subtipos para AnuncioVideo
+    FORMATO = "Vídeo"
+    SUBTIPOS = ("instream", "outstream")
 
-    def __init__(self, width: int, height: int, file_url: str, click_url: str, sub_type: str, duration: int):
-        super().__init__(width, height, file_url, click_url, sub_type)
-        # Initialize duration attribute and ensure it's at least 1
-        self.duration = max(duration, 1)
+    def __init__(self, ancho: int, alto: int, url_archivo: str, url_clic: str, sub_tipo: str, duracion: int):
+        super().__init__(ancho, alto, url_archivo, url_clic, sub_tipo)
+        # Inicializa el atributo de duracion y asegura que sea al menos 1
+        self.duracion = max(duracion, 1)
 
     @property
-    def format(self):
-        # Getter method for advertisement format
-        return self.FORMAT
+    def formato(self):
+        # Metodo getter para el formato del anuncio
+        return self.FORMATO
 
-    def compress_ads(self):
-        # Method to compress video advertisements
-        print("VIDEO COMPRESSION IMPLEMENTED")
+    def comprimir_anuncios(self):
+        # Metodo para comprimir anuncios de video
+        print("COMPRESIÓN DE ANUNCIOS DE VÍDEO IMPLEMENTADA")
 
-    def resize_advertisement(self):
-        # Method to resize video advertisements
-        print("VIDEO RESIZING IMPLEMENTED")
+    def redimensionar_anuncio(self):
+        # Metodo para redimensionar anuncios de video
+        print("REDIMENSIONAMIENTO DE ANUNCIOS DE VÍDEO IMPLEMENTADO")
 
-class DisplayAdvertisement(Advertisement):
-    # Define format and subtypes for DisplayAdvertisement
-    FORMAT = "Display"
-    SUBTYPES = ("traditional", "native")
+class AnuncioDisplay(Anuncio):
+    # Define el formato y los subtipos para AnuncioDisplay
+    FORMATO = "Display"
+    SUBTIPOS = ("tradicional", "nativo")
 
-    def compress_ads(self):
-        # Method to compress display advertisements
-        print("DISPLAY ADS COMPRESSION IMPLEMENTED")
+    def comprimir_anuncios(self):
+        # Metodo para comprimir anuncios de display
+        print("COMPRESIÓN DE ANUNCIOS DE DISPLAY IMPLEMENTADA")
 
-    def resize_advertisement(self):
-        # Method to resize display advertisements
-        print("DISPLAY ADS RESIZING IMPLEMENTED")
+    def redimensionar_anuncio(self):
+        # Metodo para redimensionar anuncios de display
+        print("REDIMENSIONAMIENTO DE ANUNCIOS DE DISPLAY IMPLEMENTADO")
 
-class SocialAdvertisement(Advertisement):
-    # Define format and subtypes for SocialAdvertisement
-    FORMAT = "Social"
-    SUBTYPES = ("facebook", "linkedin")
+class AnuncioSocial(Anuncio):
+    # Define el formato y los subtipos para AnuncioSocial
+    FORMATO = "Social"
+    SUBTIPOS = ("facebook", "linkedin")
 
-    def compress_ads(self):
-        # Method to compress social advertisements
-        print("SOCIAL ADS COMPRESSION IMPLEMENTED")
+    def comprimir_anuncios(self):
+        # Metodo para comprimir anuncios sociales
+        print("COMPRESIÓN DE ANUNCIOS SOCIALES IMPLEMENTADA")
 
-    def resize_advertisement(self):
-        # Method to resize social advertisements
-        print("SOCIAL ADS RESIZING IMPLEMENTED")
+    def redimensionar_anuncio(self):
+        # Metodo para redimensionar anuncios sociales
+        print("REDIMENSIONAMIENTO DE ANUNCIOS SOCIALES IMPLEMENTADO")
