@@ -1,37 +1,35 @@
-from anuncio import Anuncio
+from advertisement import Advertisement
 
-class Video(Anuncio):
-    #definicion de formato de los anuncios, en video y en dos subtipos; 'instream' y 'outstream'
-    FORMATO = "Video"
-    SUB_TIPOS = ("instream", "outstream")
+class Video(Advertisement):
+    # Constants for the video advertisement format and subtypes
+    FORMAT = "Video"
+    SUBTYPES = ("instream", "outstream")
     
-    def __init__(self, ancho: int, alto: int, url_archivo: str, url_clic: str, sub_tipo: str, duracion: int):
-        # funcion integrada de Python que permite acceder a los metodos y atributos de la superclase 'Anuncio'.
-        super().__init__(ancho, alto, url_archivo, url_clic, sub_tipo) 
-        # atributos de los objetos de la superclase 'Anuncio'
-        self.__alto = 1
-        self.__ancho = 1
-        self.__duracion = duracion if duracion > 0 else 5 # configuracion de la duracion del video
+    def __init__(self, width: int, height: int, file_url: str, click_url: str, sub_type: str, duration: int):
+        # Initialize the Video advertisement with width, height, file URL, click URL, subtype, and duration
+        super().__init__(width, height, file_url, click_url, sub_type)
+        self.__duration = max(duration, 1)  # Video duration validation
         
     @property
-    def ancho(self, ):
-        return self.__ancho
+    def width(self):
+        return self.__width
     
-    @ancho.setter #configuracion de nuevas dimensiones de ancho en 'nuevo_ancho'
-    def ancho(self, nuevo_ancho): 
+    @width.setter
+    def width(self, new_width):
         pass
+    
     @property
-    def alto(self, ):
-        return self.__alto
+    def height(self):
+        return self.__height
 
-    @alto.setter #configuracion de nuevas dimensiones de alto en 'nuevo_alto'
-    def alto(self, nuevo_alto):
+    @height.setter
+    def height(self, new_height):
         pass
     
-    def comprimir_anuncio(self):
-        print("COMPRESIÓN DE VIDEO NO IMPLEMENTADA AÚN")
+    def compress_advertisement(self):
+        # Method to compress video advertisement
+        print("Video compression not yet implemented")
 
-    def redimensionar_anuncio(self):
-        print("RECORTE DE VIDEO NO IMPLEMENTADO AÚN")
-
-
+    def resize_advertisement(self):
+        # Method to resize video advertisement
+        print("Video resizing not yet implemented")

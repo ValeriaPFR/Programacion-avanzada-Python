@@ -1,81 +1,122 @@
 from abc import ABC, abstractmethod
-from error import SubTipoInvalidoError
 
-class Anuncio(ABC):
-    def __init__(self, ancho: int, alto: int, url_archivo: str, url_clic: str, sub_tipo: str):
-        self.ancho = ancho
-        self.alto = alto
-        self.url_archivo = url_archivo
-        self.url_clic = url_clic
-        self.sub_tipo = sub_tipo
+class Advertisement(ABC):
+    # Constructor method for Advertisement class
+    def __init__(self, width: int, height: int, file_url: str, click_url: str, sub_type: str):
+        # Initialize attributes for width, height, file_url, click_url, and sub_type
+        self.width = width
+        self.height = height
+        self.file_url = file_url
+        self.click_url = click_url
+        self.sub_type = sub_type
 
     @property
+    def width(self):
+        # Getter method for width attribute
+        return self.__width
+
+    @width.setter
+    def width(self, new_width):
+        # Setter method for width attribute
+        if new_width > 0:
+            self.__width = new_width
+        else:
+            raise ValueError("Width must be a positive value.")
+
+    @property
+    def height(self):
+        # Getter method for height attribute
+        return self.__height
+
+    @height.setter
+    def height(self, new_height):
+        # Setter method for height attribute
+        if new_height > 0:
+            self.__height = new_height
+        else:
+            raise ValueError("Height must be a positive value.")
+
+    @property
+    def file_url(self):
+        # Getter method for file_url attribute
+        return self.__file_url
+
+    @file_url.setter
+    def file_url(self, new_url):
+        # Setter method for file_url attribute
+        self.__file_url = new_url
+
+    @property
+    def click_url(self):
+        # Getter method for click_url attribute
+        return self.__click_url
+
+    @click_url.setter
+    def click_url(self, new_url):
+        # Setter method for click_url attribute
+        self.__click_url = new_url
+
     @abstractmethod
-    def formato(self):
+    def format(self):
+        # Abstract method for determining format of advertisement
         pass
 
     @staticmethod
-    def mostrar_formatos(formato: str, subTipos: tuple):
+    def show_formats(format: str, sub_types: tuple):
+        # Static method to display available formats
         print(f"""
-FORMATO {formato}
+FORMAT {format}
 ==========
-- {subTipos[0]}
-- {subTipos[1]}
+- {sub_types[0]}
+- {sub_types[1]}
 ==========
 """)
 
-class Video(Anuncio):
-    FORMATO = "Video"
-    SUBTIPOS = ("instream", "outstream")
+class VideoAdvertisement(Advertisement):
+    # Define format and subtypes for VideoAdvertisement
+    FORMAT = "Video"
+    SUBTYPES = ("instream", "outstream")
 
-    def __init__(self, ancho: int, alto: int, url_archivo: str, url_clic: str, sub_tipo: str, duracion: int):
-        super().__init__(ancho, alto, url_archivo, url_clic, sub_tipo)
-        self.duracion = max(duracion, 1)
+    def __init__(self, width: int, height: int, file_url: str, click_url: str, sub_type: str, duration: int):
+        super().__init__(width, height, file_url, click_url, sub_type)
+        # Initialize duration attribute and ensure it's at least 1
+        self.duration = max(duration, 1)
 
     @property
-    def formato(self):
-        return self.FORMATO
+    def format(self):
+        # Getter method for advertisement format
+        return self.FORMAT
 
-    def comprimir_anuncios(self):
-        # Implementar la lógica específica para comprimir un anuncio de video
-        # (por ejemplo, utilizando una biblioteca de compresión de video)
-        print("COMPRESIÓN DE VIDEO IMPLEMENTADA")  # Mensaje informativo
+    def compress_ads(self):
+        # Method to compress video advertisements
+        print("VIDEO COMPRESSION IMPLEMENTED")
 
-    def redimensionar_anuncio(self):
-        # Implementar la lógica específica para redimensionar un anuncio de video
-        # (por ejemplo, utilizando una biblioteca de manipulación de imágenes)
-        print("REDIMENSIONAMIENTO DE VIDEO IMPLEMENTADO")  # Mensaje informativo
+    def resize_advertisement(self):
+        # Method to resize video advertisements
+        print("VIDEO RESIZING IMPLEMENTED")
 
-class Display(Anuncio):
-    FORMATO = "Display"
-    SUBTIPOS = ("tradicional", "native")
+class DisplayAdvertisement(Advertisement):
+    # Define format and subtypes for DisplayAdvertisement
+    FORMAT = "Display"
+    SUBTYPES = ("traditional", "native")
 
-    def __init__(self, ancho: int, alto: int, url_archivo: str, url_clic: str, sub_tipo: str):
-        super().__init__(ancho, alto, url_archivo, url_clic, sub_tipo)
+    def compress_ads(self):
+        # Method to compress display advertisements
+        print("DISPLAY ADS COMPRESSION IMPLEMENTED")
 
-    def comprimir_anuncios(self):
-        # Implementar la lógica específica para comprimir un anuncio de display
-        # (por ejemplo, utilizando técnicas de optimización de imágenes)
-        print("COMPRESIÓN DE ANUNCIOS DISPLAY IMPLEMENTADA")  # Mensaje informativo
+    def resize_advertisement(self):
+        # Method to resize display advertisements
+        print("DISPLAY ADS RESIZING IMPLEMENTED")
 
-    def redimensionar_anuncio(self):
-        # Implementar la lógica específica para redimensionar un anuncio de display
-        # (por ejemplo, ajustando el tamaño de la imagen)
-        print("REDIMENSIONAMIENTO DE ANUNCIOS DISPLAY IMPLEMENTADO")  # Mensaje informativo
+class SocialAdvertisement(Advertisement):
+    # Define format and subtypes for SocialAdvertisement
+    FORMAT = "Social"
+    SUBTYPES = ("facebook", "linkedin")
 
-class Social(Anuncio):
-    FORMATO = "Social"
-    SUBTIPOS = ("facebook", "linkedin")
+    def compress_ads(self):
+        # Method to compress social advertisements
+        print("SOCIAL ADS COMPRESSION IMPLEMENTED")
 
-    def __init__(self, ancho: int, alto: int, url_archivo: str, url_clic: str, sub_tipo: str):
-        super().__init__(ancho, alto, url_archivo, url_clic, sub_tipo)
-
-    def comprimir_anuncios(self):
-        # Implementar la lógica específica para comprimir un anuncio de redes sociales
-        # (por ejemplo, utilizando herramientas de optimización de contenido)
-        print("COMPRESIÓN DE ANUNCIOS SOCIALES IMPLEMENTADA")  # Mensaje informativo
-
-    def redimensionar_anuncio(self):
-        # Implementar la lógica específica para redimensionar un anuncio de redes sociales
-        # (por ejemplo, ajustando el formato de la imagen o el texto)
-        print("REDIMENSIONAMIENTO DE ANUNCIOS SOCIALES IMPLEMENTADO")  # Mensaje informativo
+    def resize_advertisement(self):
+        # Method to resize social advertisements
+        print("SOCIAL ADS RESIZING IMPLEMENTED")

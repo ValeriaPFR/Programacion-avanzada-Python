@@ -1,14 +1,18 @@
-from anuncio import Anuncio
+from advertisement import Advertisement
 
-class Social(Anuncio):
-    FORMATO = "Social"
-    SUBTIPOS = ("facebook", "linkedin")
+class Social(Advertisement):
+    # Constants for the social advertisement format and subtypes
+    FORMAT = "Social"
+    SUBTYPES = ("facebook", "linkedin")
 
-    def __init__(self, ancho: int, alto: int, url_archivo: str, url_clic: str, sub_tipo: str):
-        super().__init__(ancho, alto, url_archivo, url_clic, sub_tipo)  # Llamada correcta a super()
+    def __init__(self, width: int, height: int, file_url: str, click_url: str, sub_type: str):
+        # Initialize the Social advertisement with width, height, file URL, click URL, and subtype
+        super().__init__(width, height, file_url, click_url, sub_type)  
         
-    def comprimir_anuncios(self):
-        print("Compresión de social no implementada aún")
+    def compress_ads(self):
+        # Method to compress social ads
+        print("Social ads compression not yet implemented")
 
-    def redimensionar_anuncio(self):
-        print("Recorte de social no implementada aún")
+    def resize_advertisement(self):
+        # Method to resize social ads
+        print("Social ads resizing not yet implemented")

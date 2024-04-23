@@ -1,7 +1,9 @@
-class LargoExcedidoError(Exception):
-    def __init__(self, mensaje):
-        self.mensaje = mensaje
+class LengthExceededError(Exception):
+    def __init__(self, message):
+        super().__init__(message)  # Call the constructor of the base class Exception
+        self.message = message
 
-class SubTipoInvalidoError(Exception):
-    def __init__(self, mensaje):
-        self.mensaje = mensaje
+class InvalidSubTypeError(Exception):
+    def __init__(self, message):
+        super().__init__(message)  # Call the constructor of the base class Exception
+        self.message = message

@@ -1,70 +1,70 @@
 from datetime import datetime
-from anuncio import Video, Display, Social  # Importar datetime para trabajar con fechas
+from advertisement import Video, Display, Social  # Import datetime to work with dates
 
-class Campania:
-    def __init__(self, nombre: str, fecha_inicio: datetime, fecha_termino: datetime, anuncios: list):
-        # constructor de la clase 'Campania', inicializa los atributos de la superclase
-        self.__nombre = nombre  # asignar el nombre de la campania
-        self.__fecha_inicio = fecha_inicio  # asignar la fecha de inicio de la campania
-        self.__fecha_termino = fecha_termino  # asignar la fecha de termino de la campania
-        self.__anuncios = anuncios  # asignar la lista de anuncios asociados a la campania
+class Campaign:
+    def __init__(self, name: str, start_date: datetime, end_date: datetime, ads: list):
+        # Constructor of the 'Campaign' class, initializes superclass attributes
+        self.__name = name  # Assign the campaign name
+        self.__start_date = start_date  # Assign the campaign start date
+        self.__end_date = end_date  # Assign the campaign end date
+        self.__ads = ads  # Assign the list of advertisements associated with the campaign
 
     @property
-    def nombre(self):
-        # getter para el nombre de la campania
-        return self.__nombre
+    def name(self):
+        # Getter for the campaign name
+        return self.__name
 
-    @nombre.setter
-    def nombre(self, nuevo_nombre):
-        # setter para el nombre de la campania
-        if len(nuevo_nombre) > 250:  # verificar que el nuevo nombre no exceda los 250 caracteres
-            raise ValueError(f"El nombre no puede exceder los 250 caracteres. Ingresaste {len(nuevo_nombre)} caracteres.")
+    @name.setter
+    def name(self, new_name):
+        # Setter for the campaign name
+        if len(new_name) > 250:  # Check that the new name does not exceed 250 characters
+            raise ValueError(f"The name cannot exceed 250 characters. You entered {len(new_name)} characters.")
         else:
-            self.__nombre = nuevo_nombre  # actualizar el nombre de la campania si es válido
+            self.__name = new_name  # Update the campaign name if valid
 
     @property
-    def fecha_inicio(self):
-        # getter para la fecha de inicio de la campania
-        return self.__fecha_inicio
+    def start_date(self):
+        # Getter for the campaign start date
+        return self.__start_date
 
-    @fecha_inicio.setter
-    def fecha_inicio(self, nueva_fecha_inicio):
-        # setter para la fecha de inicio de la campania
-        self.__fecha_inicio = nueva_fecha_inicio  # actualizar la fecha de inicio de la campania
-
-    @property
-    def fecha_termino(self):
-        # getter para la fecha de termino de la campania
-        return self.__fecha_termino
-
-    @fecha_termino.setter
-    def fecha_termino(self, nueva_fecha_termino):
-        # setter para la fecha de termino de la campania
-        self.__fecha_termino = nueva_fecha_termino  # actualizar la fecha de termino de la campania
+    @start_date.setter
+    def start_date(self, new_start_date):
+        # Setter for the campaign start date
+        self.__start_date = new_start_date  # Update the campaign start date
 
     @property
-    def anuncios(self):
-        # getter para obtener la lista de anuncios asociados a la campania
-        return self.__anuncios
+    def end_date(self):
+        # Getter for the campaign end date
+        return self.__end_date
 
-def __str__(self):
-    # inicializar contadores para cada tipo de anuncio
-    cant_video = 0  # contador para anuncios de tipo Video
-    cant_display = 0  # contador para anuncios de tipo 'Display'
-    cant_social = 0  # contador para anuncios de tipo 'Social'
+    @end_date.setter
+    def end_date(self, new_end_date):
+        # Setter for the campaign end date
+        self.__end_date = new_end_date  # Update the campaign end date
 
-    # iterar sobre la lista de anuncios
-    for elemento in self.__anuncios:
-        # verificar el tipo de cada elemento
-        if isinstance(elemento, Video):  # vi el elemento es de tipo 'Video'
-            cant_video += 1  # incrementar el contador de 'Video'
-        elif isinstance(elemento, Display):  # si el elemento es de tipo 'Display'
-            cant_display += 1  # incrementar el contador de 'Display'
-        elif isinstance(elemento, Social):  # si el elemento es de tipo 'Social'
-            cant_social += 1  # Incrementar el contador de 'Social'
-    
-    # Crear la cadena texto de salida, con los conteos de cada tipo de anuncio
-    return f"""
-    Nombre de la Campaña: {self.__nombre}
-    Anuncios: {cant_video} Video, {cant_display} Display, {cant_social} Social
+    @property
+    def ads(self):
+        # Getter to obtain the list of advertisements associated with the campaign
+        return self.__ads
+
+    def __str__(self):
+        # Initialize counters for each type of advertisement
+        video_count = 0  # Counter for 'Video' type advertisements
+        display_count = 0  # Counter for 'Display' type advertisements
+        social_count = 0  # Counter for 'Social' type advertisements
+
+        # Iterate over the list of advertisements
+        for item in self.__ads:
+            # Check the type of each item
+            if isinstance(item, Video):  # If the item is of type 'Video'
+                video_count += 1  # Increment the 'Video' counter
+            elif isinstance(item, Display):  # If the item is of type 'Display'
+                display_count += 1  # Increment the 'Display' counter
+            elif isinstance(item, Social):  # If the item is of type 'Social'
+                social_count += 1  # Increment the 'Social' counter
+        
+        # Create the output text string, with the counts of each type of advertisement
+        return f"""
+    Campaign Name: {self.__name}
+    Advertisements: {video_count} Video, {display_count} Display, {social_count} Social
     """
