@@ -1,14 +1,18 @@
-from anuncio import Anuncio
+from advertisement import Advertisement
 
-class Display(Anuncio):
-    FORMATO = "Display"
-    SUBTIPOS = ("tradicional", "native")
+class Display(Advertisement):
+    # Class attributes defining the format and subtypes of the Display advertisement
+    FORMAT = "Display"
+    SUBTYPES = ("traditional", "native")
     
-    def __init__(self, ancho: int, alto: int, url_archivo: str, url_clic: str, sub_tipo: str):
-        super().__init__(ancho, alto, url_archivo, url_clic, sub_tipo)
+    def __init__(self, width: int, height: int, file_url: str, click_url: str, sub_type: str):
+        # Initialize the Display advertisement with provided attributes
+        super().__init__(width, height, file_url, click_url, sub_type)
 
-    def comprimir_anuncios(self):
-        print("COMPRESIÓN DE ANUNCIOS DISPLAY NO IMPLEMENTADA AÚN")
+    def compress_ads(self):
+        # Method to compress Display advertisements
+        print("DISPLAY ADS COMPRESSION NOT YET IMPLEMENTED")
 
-    def redimensionar_anuncio(self):
-        print("REDIMENSIONAMIENTO DE ANUNCIOS DISPLAY NO IMPLEMENTADO AÚN")
+    def resize_advertisement(self):
+        # Method to resize Display advertisements
+        print("DISPLAY ADS RESIZING NOT YET IMPLEMENTED")

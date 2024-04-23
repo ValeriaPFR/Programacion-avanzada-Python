@@ -4,11 +4,11 @@ class Advertisement(ABC):
     # Constructor method for Advertisement class
     def __init__(self, width: int, height: int, file_url: str, click_url: str, sub_type: str):
         # Initialize attributes for width, height, file_url, click_url, and sub_type
-        self.width = width
-        self.height = height
-        self.file_url = file_url
-        self.click_url = click_url
-        self.sub_type = sub_type
+        self.__width = width
+        self.__height = height
+        self.__file_url = file_url
+        self.__click_url = click_url
+        self.__sub_type = sub_type
 
     @property
     def width(self):
